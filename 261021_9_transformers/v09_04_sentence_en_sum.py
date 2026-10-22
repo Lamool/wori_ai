@@ -1,0 +1,34 @@
+from transformers import pipeline
+# pip install transformers==5.20.2 (원래)
+# 다운 그레이드
+# pip install transformers==4.57.6 (이거로 다운 받음)
+# pip install transformers==4.46.3 (강사님)
+# pip list로 버전 확인
+
+# 1. 요약 파이프라인
+summarizer = pipeline("summarization", model="t5-small")
+
+# 2.  요약할 원문 (영어 단락)
+text = """
+How can you survive when you can't remember who wants you dead?
+Dr. Charly McKenna had the perfect life: a thriving dermatology practice, a luxury apartment overlooking Central Park, and a handsome husband who adored her.
+Until the night a bullet tore through her skull… and stole everything.
+Now Charly wakes in a rehabilitation hospital unable to walk, speak, or remember her own name. All she knows is that someone tried to kill her―and they may still be out there. As fragments of memory surface, so do unsettling questions about the people around her, including the attentive man who keeps appearing at her bedside.
+The truth of what happened that night lives somewhere inside her brain. And as Charly pieces together the jagged edges of her past, she begins to realize the most terrifying possibility: the person who wants her dead might be the one she once trusted most.
+From #1 New York Times bestselling author Freida McFadden comes a scalpel-sharp psychological thriller about fractured memory, buried secrets, and how far the mind will go to protect you from the truth.
+"""
+
+# 3. 요약 실행
+summary = summarizer(
+    text,
+    min_length=20,      # 최소 토큰 수
+    max_length=100,     # 최대 토큰 수
+    do_sample=False     # 매번 동일 결과 출력
+)
+
+# 4. 결과 확인
+sum_text = summary[0]["summary_text"]
+print(f"요약된 문장 : {sum_text}")
+# 요약된 문장 : the truth of what happened that night lives somewhere inside her brain .
+# from #1 New York Times bestselling author Freida McFadden comes a scalpel-sharp psychological
+# thriller about fractured memory and buried secrets .
