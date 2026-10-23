@@ -9,7 +9,7 @@ while True:
     try:
         user_meters = float(user_input)
         feet = meters_to_feet(user_meters)
-        print(f"{user__meters}m는 {feet}ft 입니다.")
+        print(f"{user_meters}m는 {feet}ft 입니다.")
         break
     except ValueError:
         print("숫자를 입력해주세요. 다시 시도하세요.")

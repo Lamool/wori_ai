@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>파이썬 계산기</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+</head>
+<body>
+  <main class="app">
+    <section class="calculator" aria-label="파이썬 계산기">
+      <header class="calc-header">
+        <h1>파이썬 계산기</h1>
+        <span id="status" class="status loading">파이썬 불러오는 중…</span>
+      </header>
+
+      <div class="log-wrap">
+        <div id="log" class="log" aria-live="polite"></div>
+        <button id="clearLog" class="text-btn" type="button">기록 지우기</button>
+      </div>
+
+      <div class="input-area">
+        <div class="mode-toggle" role="group" aria-label="입력 모드">
+          <button id="modeLine" class="mode-btn active" type="button">한 줄</button>
+          <button id="modeMulti" class="mode-btn" type="button">여러 줄</button>
+        </div>
+        <input id="lineInput" class="code-input" type="text" placeholder="예: 2**10  (Enter로 실행)"
+               autocomplete="off" autocapitalize="off" spellcheck="false" disabled />
+        <textarea id="multiInput" class="code-input hidden" rows="5"
+                  placeholder="for i in range(3):&#10;    print(i)&#10;(Ctrl+Enter로 실행)"
+                  autocapitalize="off" spellcheck="false" disabled></textarea>
+      </div>
+
+      <div class="keypad" id="keypad">
+        <button class="key fn" data-insert="import math">import math</button>
+        <button class="key fn" data-insert="math.sqrt(">√ sqrt</button>
+        <button class="key fn" data-insert="math.pi">π pi</button>
+        <button class="key fn" data-insert="print(">print</button>
+
+        <button class="key fn" data-insert="abs(">abs</button>
+        <button class="key fn" data-insert="round(">round</button>
+        <button class="key op" data-insert="(">(</button>
+        <button class="key op" data-insert=")">)</button>
+
+        <button class="key ctrl" data-action="clear">C</button>
+        <button class="key ctrl" data-action="backspace">⌫</button>
+        <button class="key op" data-insert=",">,</button>
+        <button class="key op" data-insert="%">%</button>
+
+        <button class="key" data-insert="7">7</button>
+        <button class="key" data-insert="8">8</button>
+        <button class="key" data-insert="9">9</button>
+        <button class="key op" data-insert="/">/</button>
+
+        <button class="key" data-insert="4">4</button>
+        <button class="key" data-insert="5">5</button>
+        <button class="key" data-insert="6">6</button>
+        <button class="key op" data-insert="*">*</button>
+
+        <button class="key" data-insert="1">1</button>
+        <button class="key" data-insert="2">2</button>
+        <button class="key" data-insert="3">3</button>
+        <button class="key op" data-insert="-">-</button>
+
+        <button class="key" data-insert="0">0</button>
+        <button class="key" data-insert=".">.</button>
+        <button class="key op" data-insert="**">**</button>
+        <button class="key op" data-insert="+">+</button>
+
+        <button class="key op" data-insert="//">//</button>
+        <button class="key equals" data-action="run">=</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

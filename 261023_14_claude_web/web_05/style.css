@@ -1,0 +1,343 @@
+/* 토큰: DESIGN.md frontmatter 값을 그대로 옮김 */
+:root {
+  --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Malgun Gothic", sans-serif;
+
+  --primary-default: oklch(0.600 0.219 258);
+  --primary-light: oklch(0.964 0.016 254);
+  --secondary-default: oklch(0.666 0.247 358);
+  --negative-dark: oklch(0.507 0.208 29);
+
+  --content-primary: oklch(0.218 0.019 285);
+  --content-secondary: oklch(0.385 0.027 285);
+  --content-tertiary: oklch(0.561 0.037 285);
+  --content-disabled: oklch(0.797 0.037 286);
+
+  --bg-primary: oklch(1.000 0.000 0);
+  --bg-secondary: oklch(0.985 0.003 265);
+
+  --border-primary: oklch(0.874 0.023 281);
+  --border-secondary: oklch(0.944 0.012 276);
+  --border-focus: oklch(0.218 0.019 285);
+
+  --overlay-secondary: oklch(0.680 0.042 285 / 20%);
+  --overlay-tertiary: oklch(0.482 0.032 285 / 8%);
+
+  --space-2: 4px;
+  --space-3: 8px;
+  --space-4: 12px;
+  --space-5: 16px;
+  --space-6: 20px;
+  --space-7: 24px;
+
+  --radius-m: 8px;
+  --radius-l: 12px;
+  --radius-xl: 16px;
+
+  --shadow-1: 0 1px 8px oklch(0 0 0 / 8%);
+  --transition: all .2s ease-in-out;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-7) var(--space-5);
+  background: var(--bg-secondary);
+  color: var(--content-primary);
+  font-family: var(--font-sans);
+  letter-spacing: -0.025em;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* 레이아웃 */
+.app {
+  width: 100%;
+  max-width: 720px;
+  display: grid;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .app {
+    grid-template-columns: 380px 1fr;
+  }
+}
+
+/* 계산기 본체 */
+.calculator {
+  background: var(--bg-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-6);
+}
+
+.display {
+  min-height: 116px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-2) var(--space-6);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.display p {
+  margin: 0;
+}
+
+.display-expr {
+  min-height: 24px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--content-tertiary);
+  overflow-wrap: anywhere;
+}
+
+.display-result {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.display-result.is-long {
+  font-size: 38px;
+}
+
+.display-result.is-longer {
+  font-size: 30px;
+}
+
+.display-result.is-error {
+  font-size: 22px;
+  color: var(--negative-dark);
+}
+
+/* 키패드 */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.key {
+  position: relative;
+  overflow: hidden;
+  height: 56px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-m);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* State Layer: 색 교체 대신 오버레이로 상태를 표현 */
+.key::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  transition: var(--transition);
+  pointer-events: none;
+}
+
+.key:hover::after {
+  background: var(--overlay-tertiary);
+}
+
+.key:active,
+.key.is-pressed {
+  transform: scale(.97);
+}
+
+.key:active::after,
+.key.is-pressed::after {
+  background: var(--overlay-secondary);
+}
+
+.key-num {
+  background: var(--bg-primary);
+  border-color: var(--border-secondary);
+  color: var(--content-primary);
+}
+
+.key-op {
+  background: var(--primary-light);
+  color: var(--primary-default);
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.key-clear {
+  grid-column: span 3;
+  background: transparent;
+  border-color: var(--border-primary);
+  color: var(--content-secondary);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.key-zero {
+  grid-column: span 2;
+}
+
+.key-equals {
+  background: var(--secondary-default);
+  color: var(--bg-primary);
+  font-size: 24px;
+}
+
+/* 계산 기록 */
+.history {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-l);
+  padding: var(--space-6);
+}
+
+.history-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.history-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.history-clear {
+  height: 32px;
+  padding: var(--space-2) var(--space-4);
+  background: transparent;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-m);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--content-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.history-clear:hover:not(:disabled) {
+  background: var(--overlay-tertiary);
+}
+
+.history-clear:disabled {
+  color: var(--content-disabled);
+  border-color: var(--border-secondary);
+  cursor: default;
+}
+
+.history-empty {
+  margin: 0;
+  padding: var(--space-7) 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--content-tertiary);
+  text-align: center;
+}
+
+.history-empty[hidden] {
+  display: none;
+}
+
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .history-list {
+    max-height: 380px;
+    overflow-y: auto;
+  }
+}
+
+.history-list li + li {
+  border-top: 1px solid var(--border-secondary);
+}
+
+.history-item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-3);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-m);
+  text-align: right;
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  transition: var(--transition);
+}
+
+.history-item:hover {
+  background: var(--overlay-tertiary);
+}
+
+.history-expr {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--content-tertiary);
+  overflow-wrap: anywhere;
+}
+
+.history-result {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--content-primary);
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::after {
+    transition: none !important;
+  }
+
+  .key:active,
+  .key.is-pressed {
+    transform: none;
+  }
+}

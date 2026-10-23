@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>계산기</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <section class="calculator" aria-label="계산기">
+      <div class="display" aria-live="polite">
+        <div class="display__sub" id="sub"></div>
+        <div class="display__main" id="main">0</div>
+      </div>
+
+      <div class="keys">
+        <button class="key key--fn" data-action="clear">AC</button>
+        <button class="key key--fn" data-action="backspace" aria-label="지우기">⌫</button>
+        <button class="key key--fn" data-action="percent">%</button>
+        <button class="key key--op" data-op="/">÷</button>
+
+        <button class="key" data-digit="7">7</button>
+        <button class="key" data-digit="8">8</button>
+        <button class="key" data-digit="9">9</button>
+        <button class="key key--op" data-op="*">×</button>
+
+        <button class="key" data-digit="4">4</button>
+        <button class="key" data-digit="5">5</button>
+        <button class="key" data-digit="6">6</button>
+        <button class="key key--op" data-op="-">−</button>
+
+        <button class="key" data-digit="1">1</button>
+        <button class="key" data-digit="2">2</button>
+        <button class="key" data-digit="3">3</button>
+        <button class="key key--op" data-op="+">+</button>
+
+        <button class="key" data-action="negate" aria-label="부호 전환">±</button>
+        <button class="key" data-digit="0">0</button>
+        <button class="key" data-action="dot">.</button>
+        <button class="key key--eq" data-action="equals">=</button>
+      </div>
+    </section>
+
+    <section class="history" aria-label="계산 기록">
+      <div class="history__head">
+        <h2>기록</h2>
+        <button class="history__clear" id="clearHistory">비우기</button>
+      </div>
+      <ul class="history__list" id="historyList"></ul>
+      <p class="history__empty" id="historyEmpty">아직 계산 기록이 없습니다.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

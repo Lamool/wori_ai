@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>테이프 계산기</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="machine">
+    <h1 class="visually-hidden">테이프 계산기</h1>
+
+    <section class="tape-wrap" aria-label="계산 기록">
+      <div class="tape" id="tape">
+        <p class="tape-empty" id="tapeEmpty">계산하면 여기에 인쇄됩니다</p>
+        <ol class="tape-list" id="tapeList"></ol>
+      </div>
+    </section>
+
+    <div class="body">
+      <span class="slot" aria-hidden="true"></span>
+
+      <div class="display" aria-live="polite">
+        <div class="expr" id="expr"></div>
+        <div class="value" id="value">0</div>
+      </div>
+
+      <div class="keys" id="keys">
+        <button type="button" class="key key--fn" data-key="C" aria-label="모두 지우기">C</button>
+        <button type="button" class="key key--fn" data-key="Backspace" aria-label="한 글자 지우기">⌫</button>
+        <button type="button" class="key key--fn" data-key="%" aria-label="퍼센트">%</button>
+        <button type="button" class="key key--op" data-key="÷" aria-label="나누기">÷</button>
+
+        <button type="button" class="key" data-key="7">7</button>
+        <button type="button" class="key" data-key="8">8</button>
+        <button type="button" class="key" data-key="9">9</button>
+        <button type="button" class="key key--op" data-key="×" aria-label="곱하기">×</button>
+
+        <button type="button" class="key" data-key="4">4</button>
+        <button type="button" class="key" data-key="5">5</button>
+        <button type="button" class="key" data-key="6">6</button>
+        <button type="button" class="key key--op" data-key="−" aria-label="빼기">−</button>
+
+        <button type="button" class="key" data-key="1">1</button>
+        <button type="button" class="key" data-key="2">2</button>
+        <button type="button" class="key" data-key="3">3</button>
+        <button type="button" class="key key--op" data-key="+" aria-label="더하기">+</button>
+
+        <button type="button" class="key key--fn" data-key="±" aria-label="부호 바꾸기">±</button>
+        <button type="button" class="key" data-key="0">0</button>
+        <button type="button" class="key" data-key="." aria-label="소수점">.</button>
+        <button type="button" class="key key--eq" data-key="=" aria-label="계산하기">=</button>
+      </div>
+
+      <div class="body-foot">
+        <p class="nameplate" aria-hidden="true">테이프 계산기</p>
+        <button type="button" class="tape-clear" id="tapeClear">테이프 비우기</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
