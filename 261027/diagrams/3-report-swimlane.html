@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제보 접수부터 관리자 검수·경로 반영까지</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Serif:ital@0;1&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper:   #f5f5f5;   /* white-smoke */
+      --color-ink:     #2d3142;   /* jet-black */
+      --color-muted:   #4f5d75;   /* blue-slate */
+      --color-accent:  #bf4520;   /* burnt-tangerine */
+      --font-sans:     'Geist', 'Noto Sans KR', system-ui, sans-serif;
+      --font-serif:    'Instrument Serif', 'Noto Serif', 'Noto Serif KR', serif;
+      --font-mono:     'Geist Mono', ui-monospace, monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+
+    .frame { max-width: 1200px; width: 100%; min-width: 0; }
+    /* min-width == viewBox width keeps the type ramp; the wrapper scrolls on narrow screens. */
+    .diagram-container { width: 100%; overflow-x: auto; }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.4vw + 0.75rem, 2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: 1.5rem;
+    }
+
+    svg { width: 100%; min-width: 1200px; display: block; }
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">Swimlane · Diagram Design</p>
+    <h1>제보 접수부터 관리자 검수·경로 반영까지</h1>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1200 556" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="report-swimlane-title report-swimlane-desc">
+        <title id="report-swimlane-title">제보 접수부터 관리자 검수·경로 반영까지</title>
+        <desc id="report-swimlane-desc">사용자 제보가 서버 저장, AI 유형 분류, 관리자 검수를 거쳐 승인되면 경로 그래프에 반영되고 사용자에게 알림이 가는 흐름이다.</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+          <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.9" fill="rgba(45,49,66,0.10)"/>
+          </pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+        <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/>
+
+<rect x="40" y="40" width="1120" height="104" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+<text x="56" y="96" fill="#5a6580" font-size="12" font-weight="500" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">사용자</text>
+<rect x="40" y="144" width="1120" height="104" fill="none" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+<text x="56" y="200" fill="#5a6580" font-size="12" font-weight="500" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">서버</text>
+<rect x="40" y="248" width="1120" height="104" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+<text x="56" y="304" fill="#5a6580" font-size="12" font-weight="500" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">AI 분류기</text>
+<rect x="40" y="352" width="1120" height="104" fill="none" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+<text x="56" y="408" fill="#5a6580" font-size="12" font-weight="500" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">관리자</text>
+<line x1="150" y1="40" x2="150" y2="456" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+<path d="M330,92 H342 Q350,92 350,100 V188 Q350,196 358,196 H370" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M530,196 H542 Q550,196 550,204 V292 Q550,300 558,300 H570" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M730,300 H742 Q750,300 750,292 V204 Q750,196 758,196 H770" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+<line x1="850" y1="224" x2="850" y2="376" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+<path d="M930,404 H942 Q950,404 950,396 V204 Q950,196 958,196 H970" fill="none" stroke="#bf4520" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+<line x1="1050" y1="168" x2="1050" y2="120" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+<rect x="358" y="104" width="40" height="12" rx="2" fill="#f5f5f5"/>
+<text x="378" y="113" fill="#5a6580" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">UPLOAD</text>
+<rect x="558" y="218" width="36" height="12" rx="2" fill="#f5f5f5"/>
+<text x="576" y="227" fill="#5a6580" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">IMAGE</text>
+<rect x="760" y="250" width="60" height="12" rx="2" fill="#f5f5f5"/>
+<text x="790" y="259" fill="#5a6580" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">TYPE·SCORE</text>
+<rect x="858" y="290" width="40" height="12" rx="2" fill="#f5f5f5"/>
+<text x="878" y="299" fill="#5a6580" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">REVIEW</text>
+<rect x="958" y="290" width="44" height="12" rx="2" fill="#f5f5f5"/>
+<text x="980" y="299" fill="#bf4520" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">APPROVE</text>
+<rect x="1058" y="136" width="40" height="12" rx="2" fill="#f5f5f5"/>
+<text x="1078" y="145" fill="#5a6580" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">NOTIFY</text>
+<rect x="170" y="64" width="160" height="56" rx="6" fill="#f5f5f5"/>
+<rect x="170" y="64" width="160" height="56" rx="6" fill="rgba(79,93,117,0.10)" stroke="#5a6580" stroke-width="1"/>
+<text x="250.0" y="90.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" text-anchor="middle">제보 등록</text>
+<text x="250.0" y="106.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">photo · location</text>
+<rect x="370" y="168" width="160" height="56" rx="6" fill="#f5f5f5"/>
+<rect x="370" y="168" width="160" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+<text x="450.0" y="194.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" text-anchor="middle">접수·저장</text>
+<text x="450.0" y="210.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">status = pending</text>
+<rect x="570" y="272" width="160" height="56" rx="6" fill="#f5f5f5"/>
+<rect x="570" y="272" width="160" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+<text x="650.0" y="298.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" text-anchor="middle">유형 분류</text>
+<text x="650.0" y="314.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">class + confidence</text>
+<rect x="770" y="168" width="160" height="56" rx="6" fill="#f5f5f5"/>
+<rect x="770" y="168" width="160" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+<text x="850.0" y="194.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" text-anchor="middle">검수 큐 등록</text>
+<text x="850.0" y="210.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">sorted by score</text>
+<rect x="770" y="376" width="160" height="56" rx="6" fill="#f5f5f5"/>
+<rect x="770" y="376" width="160" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+<text x="850.0" y="402.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" text-anchor="middle">승인 / 반려</text>
+<text x="850.0" y="418.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">admin review</text>
+<rect x="970" y="168" width="160" height="56" rx="6" fill="#f5f5f5"/>
+<rect x="970" y="168" width="160" height="56" rx="6" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1"/>
+<text x="1050.0" y="194.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" text-anchor="middle">경로 그래프 반영</text>
+<text x="1050.0" y="210.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">edge penalty += w</text>
+<rect x="970" y="64" width="160" height="56" rx="6" fill="#f5f5f5"/>
+<rect x="970" y="64" width="160" height="56" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+<text x="1050.0" y="90.0" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" text-anchor="middle">처리 결과 알림</text>
+<text x="1050.0" y="106.0" fill="#4f5d75" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">push · in-app</text>
+<line x1="40" y1="492" x2="1160" y2="492" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+<text x="40" y="508" fill="#4f5d75" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" letter-spacing="0.18em">LEGEND · LANE = OWNER</text>
+<rect x="40" y="522" width="24" height="12" rx="2" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+<text x="72" y="532" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">처리 단계</text>
+<rect x="200" y="522" width="24" height="12" rx="2" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1"/>
+<text x="232" y="532" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">경로에 영향을 주는 단계</text>
+<line x1="440" y1="528" x2="468" y2="528" stroke="#bf4520" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+<text x="476" y="532" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">승인된 제보만 반영</text>
+<line x1="680" y1="528" x2="708" y2="528" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+<text x="716" y="532" fill="#4f5d75" font-size="12" font-weight="500" font-family="'Geist', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">보조 흐름 (알림)</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>
